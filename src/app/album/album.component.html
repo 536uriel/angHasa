@@ -1,0 +1,52 @@
+
+<div class="container">
+  <canvas id="con" class="can" style='background-image:url("../../assets/images/Background.jpg");background-size: 100% 100%;background-repeat: no-repeat;'></canvas>
+  
+  <input type="text" [(ngModel)]="canvasNum" style="position:absolute;top:0%;left:0%;">
+<button (click)="changeNum(canvasNum)" style="position:absolute;top:6%;left:0%;">get started</button>
+  
+  <img id="backimg" style="display:none;" src="../../assets/images/Background.jpg">
+  
+   <div *ngFor="let i of myalb">
+
+      <img [id]='"pframe" + i.counter' src="../../assets/images/Portrait Frame (2).png" style="position: absolute;height: 16.3%;width: 9%">
+
+
+     <canvas class="can2" data-toggle="modal" [attr.data-target]='"#m" + i.counter' [id]='i.counter + "canvas2"' style='position:absolute;'></canvas>
+ 
+
+
+          <img *ngIf="i.imageSrc" [height]="val[i.counter]" [width]="val[i.counter]" data-toggle="modal" [attr.data-target]='"#" + i.counter + "m"' [id]="i.counter" [src]="i.imageSrc" style="position: absolute;display:none;"> 
+  
+          <input [id]='i.counter + "p"' type='file' (change)="i.readURL($event);" style="position:absolute;display: none;" />
+         
+  
+  </div>
+  
+
+</div>
+  
+  <!-- Modal -->
+  
+  
+  
+  
+  <div *ngFor="let i of myalb" class="modal fade" [id]='"m" + i.counter' role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="height:600px;width: 400px;">
+        
+            <input  type="range" min="50" max="300" value="150" [(ngModel)]="val[i.counter]" [id]='i.counter + "r"' class="slider" style="position: absolute;left:285px;top:265px" />
+            גובה + רוחב התמונה:  {{val[i.counter]}}
+            <input  type="range" min="180" max="190" value="180" [(ngModel)]="val2[i.counter]" [id]='i.counter + "r"' class="slider2" style="position: absolute;left:20px;top:265px" />
+
+            <img src="../../assets/images/Pic Screen- Background-01.png" style="height:600px;width: 400px;" />
+            <img *ngIf="i.imageSrc" [src]="i.imageSrc" [height]="val[i.counter]" [width]="val[i.counter]" style="position:absolute;top:145px;left: 105px;" />
+    
+            <label [for]='i.counter + "p"' ><img src="../../assets/images/upload image.png"  height="50" width="50" style="cursor:pointer;position: absolute;top: 505px;left:49px" /></label>
+          <div class="close" data-dismiss="modal" aria-label="Close">  <img src="../../assets/images/OK button-01.png" [id]='i.counter + 16' type="button" height="50" width="50" (click)="drow($event)" style="cursor:pointer;position: absolute;top: 505px;left:300px"> </div>
+            <input type="text" [(ngModel)]="name[i.counter]" />
+            
+        </div>
+      </div>
+  </div>
+
